@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Electronic Sign In Sheet";
+}
+@section scripts{
+
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/elso.js"></script>
+
+}
+
+
+<div>
+
+    <!-- Nav tabs -->
+    <!--<ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#myEvents" aria-controls="myEvents" role="tab" data-toggle="tab">My Events</a></li>
+        <li role="presentation"><a href="#viewPast" aria-controls="viewPast" role="tab" data-toggle="tab">View Past Events</a></li>
+        <li role="presentation"><a href="#upcoming" aria-controls="upcoming" role="tab" data-toggle="tab">Current & Upcoming Events</a></li>
+        <li role="presentation"><a href="#contactUs" aria-controls="contactUs" role="tab" data-toggle="tab">Contact Us</a></li>
+        <li role="presentation"><a href="#help" aria-controls="help" role="tab" data-toggle="tab">Help</a></li>
+    </ul>-->
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="myEvents">
+            <div ng-app="ElsoApp" class="row">
+              <div ng-controller="ElsoController">
+    <table class="table">
+        <thead>
+            <tr>
+        <td>Event Name</td>
+        <td>Location</td>
+        <td>EventStartDate</td>
+        <td>EventEndDate</td>
+        <td>OrganizerId</td>
+        <td>Category</td>
+        <td>CreatedDate</td>
+        <td>ModifiedDate</td></tr>
+        </thead>
+        <tr ng-repeat="r in meetings">
+            <td>{{r.EventName}}</td>
+             <td>{{r.Location}}</td>
+             <td>{{r.EventStartDate}}</td>
+            <td>{{r.EventEndDate}}</td>
+            <td>{{r.OrganizerId}}</td>
+            <td>{{r.Category}}</td>
+            <td>{{r.CreatedDate}}</td>
+            <td>{{r.ModifiedDate}}</td>
+         </tr>
+       </table>
+
+</div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="viewPast">...</div>
+        <div role="tabpanel" class="tab-pane" id="upcoming">...</div>
+        <div role="tabpanel" class="tab-pane" id="contactUs">...</div>
+        <div role="tabpanel" class="tab-pane" id="help">...</div>
+    </div>
+
+</div>
+

@@ -1,0 +1,362 @@
+﻿@model ELSO.Web.ViewModel.EventViewModel
+@{ 
+    ViewBag.Title = "Create";
+}
+<header id="create">
+  <div class="header-content">
+         <div class="header-content-inner">
+                <br />
+                <h2 class="section-heading" title="Welcome" tabindex="0" id="welcomeName">Welcome @ViewBag.Name</h2>
+                <br />
+                @using (Html.BeginForm("Create", "Events", FormMethod.Post, new { id = "formContainer" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.Hidden("LoggedInUser", @ViewBag.Name as string)
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <h2 class="section-heading" title="Create Meeting" tabindex="0" id="createMeeting">Create Meeting</h2>
+                                    <hr class="primary">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="cards">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card card-block">
+                                        <h3 class="card-title">One Day Meeting</h3>
+                                        <p class="card-text">with or without pre-registration </p>
+                                        <a href="#" id="showCreateMeeting2" aria-label="One day Meeting with Sign In" class="btn btn-primary">GO</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card card-block">
+                                        <h3 class="card-title" tabindex="0" title="Recurring meeting coming Soon">Recurring Meeting</h3>
+                                        <p class="card-text"><span style="color:red">Coming Soon</span></p>
+                                        @*<a href="#" id="showRecurrance2" disabled ="true" aria-label="Recurring Meeting" class="btn btn-primary">GO</a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="" id="note"><br/><br/>
+                     <span id="newFunctionality" style="color:red"> ** New Functionality Released on 5/19 **</span><br/>
+                            As of May 19, 2017, ELSO now supports guest sign in functionality<br/>
+                            For instructions on how to use the new functionality, <a id="clickUserGuide" target="_blank" href="~/Content/ELSO User Guide.mht" title="Click Here">Click here</a> or select “Help” at the top of the screen.
+                         </div>
+                    <div id="menu" class="form-group" style="display:none">
+                        <br />
+                        <a href="#" id="mainMenu" class="btn btn-primary">Go to Main Menu</a>
+                    </div>
+                        <div id="meetingDetails" style="display:none">
+                            <div class="error alert-danger" id="errormessages"></div>
+                            <!-- end #errorContainer -->
+                            @*<div class="col-md-12">
+                                @Html.Label("Type of Meeting:", new { @class = "form-label" })
+                                @Html.HiddenFor(model => model.meetingType)
+                                <input name="meetingType" id="oneDay" type="radio" value="OneDay">One-day Meeting
+                                <input name="meetingType" id="recurring" type="radio" value="Recurring">Recurring Meeting
+                            </div><br/>*@
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.Label("Event Name (Maximum: 150 Characters)", new { @for = "EventName", @class = "form-label" })
+                                    @Html.EditorFor(model => model.EventName,
+                       new { htmlAttributes = new { @class = "form-control", placeholder = "Event Name", @maxlength = "150" } })
+                                    <span id="eventVali"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.Label("Location", new { @for = "Location", @class = "form-label" })
+                                    @Html.EditorFor(model => model.Location,
+                       new { htmlAttributes = new { @class = "form-control", placeholder = "Location" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    @Html.Label("Start Date", new { @for = "EventStartDate", @class = "form-label" })
+                                    @Html.EditorFor(model => model.EventStartDate,
+                       new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control datepicker",
+                               placeholder = "Start Date in mm/dd/yyyy"
+                           }
+                       })
+                                    <span id="datepickerVali"></span>
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.Label("Start Time", new { @for = "EventStartTime", @class = "form-label" })
+                                    @Html.EditorFor(model => model.EventStartTime,
+                       new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control timepicker",
+                               placeholder = "Start Time hh:mm"
+                           }
+                       })
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("End Date", new { @for = "EventEndDate", @class = "form-label" })
+                                    @Html.EditorFor(model => model.EventEndDate,
+                       new
+                       {
+                           htmlAttributes = new
+                           {
+                               @class = "form-control datepicker",
+                               placeholder = "End Date in mm/dd/yyyy"
+                           }
+                       })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.Label("End Time", new { @for = "EventEndTime", @class = "form-label" })
+                                    @Html.EditorFor(model => model.EventEndTime,
+                                   new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control timepicker",
+                                           placeholder = "End Time hh:mm"
+                                       }
+                                   })
+                                    <span id="timepickerVali"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.Label("Meeting Organizer:")
+                                    @*<h5 class="section-heading" title="organizer" tabindex="0" id="organizer">*@
+                                    <span id="meetingOrganizer">@ViewBag.Name</span>
+@*</h5>*@
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("Add Additional Organizer?", new { @class = "form-label" })
+                                    <input name="Organizer" id="organizerY" type="radio" value="Yes">Yes
+                                    <input name="Organizer" id="organizerN" type="radio" value="No" checked="checked">No
+                                </div>
+                                <div class="col-md-4">
+                                    @Html.Label("Registration Required?", new { @class = "form-label" })
+                                    @Html.HiddenFor(model => model.IsRegistration)
+                                    <input name="attendees" id="attendeesY" type="radio" value="Yes">Yes
+                                    <input name="attendees" id="attendeesN" type="radio" value="No" checked="checked">No
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-4" id="addAdmin" style="display:none">
+                                    <div class="input-group">
+                                        @Html.Label("Enter Organizer Pin/Email?", new { @for = "addOrganizer", @class = "form-label" })
+                                        @*@Html.HiddenFor(model => model.Organizers)*@
+                                        @Html.TextBox("addOrganizer", null, new { @class = "form-control", placeholder = "Additional Organizer", id = "orgPIN" })
+                                        <span class="input-group-btn" id="spanAdd">
+                                            &nbsp;&nbsp;<input type="button" value="Add" title="Add" tabindex="0" id="addOrganizerButton" class="btn btn-primary left" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" id="maxnoofAttendees" style="display:none">
+                                    <div class="input-group">
+                                        @Html.Label("Maximum Attendees", new { @for = "AttdMxCount", @class = "form-label" })
+                                        @Html.TextBox("AttdMxCount", null, new { @class = "form-control", placeholder = "Maximum Attendees", id = "AttdMxCount" })
+                                    </div>
+                                </div>
+                                @*<div class="col-md-4" id="registration" style="display:none">
+                                    <div class="input-group">
+                                        @Html.Label("Enter Attendee Pin/Email", new { @for = "registerAttendee", @class = "form-label" })
+                                        @Html.HiddenFor(model => model.Participants)
+                                        @Html.TextBox("registerAttendee", "Register Attendees", new { @class = "form-control", placeholder = "Register Attendees", id = "attPIN" })
+                                        <span class="input-group-btn" id="spanAdd">
+                                            &nbsp;&nbsp;<input type="button" value="Add" title="Add" tabindex="0" id="btnregistration" class="btn btn-primary left" />
+                                        </span>
+                                    </div>
+                                </div>*@
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6" id="organizers">
+                                     <div class="col-md-6 text-danger" id="orgErr"></div>
+                                    <table id="tblOrgs" class="table table-striped table-condensed"></table>
+                                </div>
+                                @*<div class="col-md-6" id="attendees">
+                                        <div class="col-md-6 text-danger" id="attErr"></div>
+                                        <table id="tblAtt" class="table table-striped table-condensed"></table>
+                                </div>*@
+                           </div>
+                           <div class="form-group">
+                                <div class="col-md-6 left" style="text-align:left">
+                                    <input type="submit" value="Create Event" title="Create Event" tabindex="0" id="createEvent" class="btn btn-primary left" />
+                                    <span id="eventStatus" tabindex="-1"> </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+</div>
+ 
+</header>
+<section id="EventTypes">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading" title="Meetings" tabindex="0" id="meetingSection">My Meetings</h2>
+                <hr class="primary">
+            </div>
+           </div>
+        <div class="row">
+            <table id="events" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col"><input type="checkbox" name="select Row" id="checkboxHeader" disabled="disabled"/></th>
+                        <th id="eventName" scope="col">Event Name</th>
+                        <th id="Location" scope="col">Location</th>
+                        <th id="Start Date" scope="col">Start Date</th>
+                        <th id="Start Time"scope="col">Start Time</th>
+                        <th id="End Date" scope="col">End Date</th>
+                        <th id="End Time" scope="col">End Time</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="edit-modal-label">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-horizontal" id="edit-form">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="edit-modal-label">Edit</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="edit-id" value="" class="hidden">
+                                    <div class="form-group">
+                    <label for="eventName" class="col-sm-2 control-label">Event Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="eventNameModel" name="eventNameModel" placeholder="Event Name" required>
+                    </div>
+                </div>
+                            <div class="form-group">
+                                <label for="location" class="col-sm-2 control-label">Location</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="locationModel" name="locationModel" placeholder="Location" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDateU" class="col-sm-2 control-label ">Start Date</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control datepicker" id="startDateU" name="EventStartDate" placeholder="Start Date" required>
+                                </div>
+                                <span id="datepickerValiU"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="startTimeU" class="col-sm-2 control-label">Start Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control timepicker" id="startTimeU" name="EventStartTime" placeholder="Start Time" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDateU" class="col-sm-2 control-label">End Date</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control datepicker" id="endDateU" name="EventEndDate" placeholder="End Date" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="endTimeU" class="col-sm-2 control-label">End Time</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control timepicker" id="endTimeU" name="EventEndTime" placeholder="End Time" required>
+                                </div>
+                                <span id="timepickerValiU"></span>
+                            </div>
+                            <span id="eventStatusUpdate" tabindex="-1"> </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" id="editEvent" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts{
+    <script src="~/Scripts/ELSO/create.js"></script>
+    <script type="text/javascript">
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        jQuery('.datepicker').datetimepicker({
+            format: 'm/d/Y',
+            lang: 'en',
+            timepicker: false,
+            minDate: today,
+            beforeShowDay: $.datepicker.noWeekends
+        });
+        jQuery('.timepicker').timepicker({
+            'scrollDefault': 'now',
+            'minTime': '8:00 AM',
+            'maxTime': '8:00 PM',
+            'timeFormat': 'h:i A'
+        });
+    </script>
+   <style type="text/css">
+                 #events_wrapper .bottom .btn-info{
+                     background-color: gainsboro !important;
+                     color: black !important;
+                     border: 1px solid #979797 !important;
+                     font-size: 12px !important;
+
+                 }
+        #events_wrapper .bottom{
+            background-color:#808080 !important;
+            /*outline: 1px solid red;*/
+            height: 40px;
+
+        }
+       #events_wrapper{
+                width: 100%;
+                overflow: visible;
+       }
+       #events_wrapper .bottom .customCRUD{
+                float:left;
+                width:12%;
+                display: block;
+                padding: 3px 0 0 3px;
+       }
+        #events_wrapper .bottom .openSignIn{
+                float:left;
+                width:8%;
+                display: block;
+                padding: 3px 0 0 3px;
+        }
+       #events_length{
+                display: block;
+                float:left;
+                width:12%;
+           padding-top:9px;
+       }
+       #events_info{
+                display: block;
+                float:right;
+                width:10%;
+                clear: none;
+           font-weight:bold;
+       }
+       #events_paginate{
+                display: block;
+                float:left;
+                width:30%;
+       }
+
+            .error a{
+                font-size: 12px;
+            }
+            #errormessages{
+                background-color:#f2dede !important;
+                border-color:#eed3d7 !important;
+                list-style:none !important;
+            }
+       #spanAdd {
+           padding-top: 25px;
+       }
+     </style>
+            }
+      

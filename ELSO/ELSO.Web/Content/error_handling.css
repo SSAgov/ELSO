@@ -1,0 +1,127 @@
+﻿/* 
+* Error Handling CSS Document
+* created by:  [PERSON_NAME]
+* last modified: 8/18/10 
+*/
+
+/* Basic Tags */
+#example {
+    margin: 1em;    
+    padding: 0;
+    background: #fff;
+    color: #000;
+    font-size: 100%;
+    font-family: Helvetica, Sans-Serif; 
+}
+
+/* Hyperlinks */
+#example a:link, #example a:visited { color: #009; text-decoration:none;}
+#example a:focus, #example a:hover, #example a:active{ text-decoration: underline;}
+
+#example h3 {
+	border:1px solid black;
+	border-width:0 0 1px 0;
+	color: #222;
+	font: 103%;
+	font-weight: bold;
+	margin:1em 0 .25em;
+	clear:both;
+	padding:.5em 0;
+}
+#example p {
+    line-height:1.5em;
+}
+
+#example p ~ p{
+   margin:1em 0 0;   
+}
+
+/* Form Tags */
+#example label {
+    line-height:1.5em;        
+}
+#example legend{
+   background:#eee;
+   margin:5px 5px 5px -5px;
+   padding:5px;
+   border:1px solid #aaa;
+}
+#example button{
+  font-family:Arial, Sans-Serif !important;
+  vertical-align:middle;
+  }
+#example input, #example textarea {
+  background:#fff;
+  border: 1px solid #ccc;
+  color:#000;
+  text-align:left;
+  font-family:Courier New, Monospace !important;
+  font-size:115%;
+  }
+
+/*
+#example input[type='checkbox'], #example input[type='radio']{
+  border:0 !important;
+  background:none !important;
+  outline:0 !important;
+}
+*/
+
+#example input:focus, #example input:hover, #example input:active,
+#example textarea:focus, #example textarea:hover, #example textarea:active { 
+ outline:1px solid #0066FF;} 
+    
+#example input.error, #example textarea.error{
+    border:1px solid red !important;
+}   
+#example input:focus.error, #example input:hover.error, #example input:active.error,
+#example textarea:focus.error, #example textarea:hover.error, #example textarea:active.error {
+    outline:1px solid red !important;
+}
+
+/* Error Holder CSS */
+#example #errorContainer {
+ background:#eee;
+ border: 1px solid #676767;
+ display:none;
+ margin:1em 0;
+ box-shadow: 3px 3px #666;
+ -moz-box-shadow: 3px 3px #666;  
+ -webkit-box-shadow:3px 3px #666;  
+ }
+/*//img/bg/red.png*/
+#example #errorContainer h4{
+ background:transparent url(/Content/img/bg/red.png) repeat-x 0% 100%;
+ border-bottom: 1px solid #676767;
+ color: #222;	
+ font: 105% sans-serif;
+ font-weight:bolder;
+ text-align: left;
+ margin: 0;
+ padding:.25em .5em; 
+}
+#example #errorContainer ul{padding:10px;margin:0;display:block;}
+#example #errorContainer li{background:url(/Content/img/icons/alert.png) no-repeat 0 50%; padding:5px 0 0 30px;list-style:none;}
+
+#example #formContainer{
+    margin:15px;
+    width:40%;
+}
+
+#example .helpText{
+ font-size:75%; 
+ padding:1px;
+ margin-top:3px;
+}
+
+#example .red{
+    color:#f00;
+}
+#example .errorTxt{
+    background:url(/Content/img/icons/error.gif) no-repeat 0 50%;     
+    padding:0 0 0 13px;
+    margin:0;
+}
+#example .instructions{
+    margin:0 5px;   
+}

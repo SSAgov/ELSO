@@ -1,0 +1,30 @@
+﻿/* 
+* Accesskey CSS Document
+* created by:  [PERSON_NAME]
+* last modified: 8/17/10 
+*/
+.tooltip,.tooltipLeft,.tooltipRight{
+	        background: #ffc36e;
+	        border: 1px solid #666;
+	        color: #000;
+	        display:none;
+            font-size:80%;
+            font-weight:bold;    
+            margin:-10px 0 0 -10px;
+            padding:0 2px;
+	        text-align:center;
+	        z-index: 9999;
+            position:absolute;
+            float:left;
+}
+.tooltipLeft{
+    position:relative;
+    left:8px;
+    bottom:5px;
+}
+.tooltipRight{
+    float:right;
+    position:relative;
+    right:-5px;
+    bottom:5px;
+}

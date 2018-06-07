@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db0b118401474981b697a26c403a22aa" Name="Diagram1" ZoomLevel="107">
+        <EntityTypeShape EntityType="dELSO3AModel.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Width="1.5" PointX="7.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.ANNL_AND_MNTHL_RCURPATRN_WKS" Width="1.5" PointX="7.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.ANNL_RCURPATRN_MNTHS" Width="1.5" PointX="10.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.DAY_REF" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.EVNT" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.EVNT_PRSN_ROLE_MAX_CNT" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.EVNT_TYP_CD_REF" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.EVNT_WEB_RSRC" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.MNTH_REF" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.PRERASGNT" Width="1.5" PointX="8.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.PRSN" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.PRSN_ROLE_ASGNT" Width="1.5" PointX="11.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.PRSN_ROLE_CD_REF" Width="1.5" PointX="3" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.PRSRPRTCPN" Width="1.5" PointX="9.75" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.RCURPATRN" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.RCURPATRN_SESN" Width="1.5" PointX="7.5" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.RCURPATRN_TYP_REF" Width="1.5" PointX="3" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.SESN_WEB_RSRC" Width="1.5" PointX="12.75" PointY="25.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.WEB_RSRC" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="dELSO3AModel.WK_REF" Width="1.5" PointX="5.25" PointY="25.875" IsExpanded="true" />
+        <AssociationConnector Association="dELSO3AModel.FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_MNTH_REF_ANNL_RCURPATRN_MNTHS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_ANNL_RCURPATRN_MNTHS" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_EVNT_EVNT_WEB_RSRC" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_EVNT_PRERASGNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_EVNT_RCURPATRN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_EVNT_TYP_CD_REF_EVNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_WEB_RSRC_EVNT_WEB_RSRC" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_PRERASGN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_ROLE_CD_REF_PRERASGNT_" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_PRSN_ROLE_ASGNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_PRSRPRTCPN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_PRSN_ROLE_CD_REF_PRSRPRTCPN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_SESN_PRSRPRTCPN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_RCURPATRN_SESN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_TYP_REF_RCURPATRN" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_RCURPATRN_SESN_SESN_WEB_RSRC" ManuallyRouted="false" />
+        <AssociationConnector Association="dELSO3AModel.FK_WEB_RSRC_SESN_WEB_RSRC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

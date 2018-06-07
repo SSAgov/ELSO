@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dELSO3AModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <Key>
+            <PropertyRef Name="DAY_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="DAY_UID" Type="int" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <Key>
+            <PropertyRef Name="WK_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="WK_UID" Type="int" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ANNL_RCURPATRN_MNTHS">
+          <Key>
+            <PropertyRef Name="MNTH_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="MNTH_UID" Type="int" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DAY_REF">
+          <Key>
+            <PropertyRef Name="DAY_UID" />
+          </Key>
+          <Property Name="DAY_UID" Type="int" Nullable="false" />
+          <Property Name="DAY_DESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="WK_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="MNTH_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="ANNL_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVNT">
+          <Key>
+            <PropertyRef Name="EVNT_UID" />
+          </Key>
+          <Property Name="EVNT_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CNCLN_DTM" Type="datetime2" Precision="7" />
+          <Property Name="EVNT_NM" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="EVNT_TYP_CD" Type="char" MaxLength="4" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EVNT_DESC" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="EVNT_PRSN_ROLE_MAX_CNT">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_CD" />
+            <PropertyRef Name="EVNT_UID" />
+          </Key>
+          <Property Name="PRSN_ROLE_CD" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EVNT_UID" Type="int" Nullable="false" />
+          <Property Name="MAX_PRSN_CNT" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVNT_TYP_CD_REF">
+          <Key>
+            <PropertyRef Name="EVNT_TYP_CD" />
+          </Key>
+          <Property Name="EVNT_TYP_CD" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EVNT_TYP_CDESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EVNT_WEB_RSRC">
+          <Key>
+            <PropertyRef Name="EVNT_UID" />
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="EVNT_UID" Type="int" Nullable="false" />
+          <Property Name="WEB_RSRC_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MNTH_REF">
+          <Key>
+            <PropertyRef Name="MNTH_UID" />
+          </Key>
+          <Property Name="MNTH_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MNTH_DESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRERASGNT">
+          <Key>
+            <PropertyRef Name="PRERASGNT_UID" />
+          </Key>
+          <Property Name="PRERASGNT_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASGNE_PRSN_ID" Type="int" Nullable="false" />
+          <Property Name="EVNT_UID" Type="int" />
+          <Property Name="PRSN_ROLE_CD" Type="char" MaxLength="4" />
+          <Property Name="ASGND_DTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRSN">
+          <Key>
+            <PropertyRef Name="PRSN_UID" />
+          </Key>
+          <Property Name="PRSN_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORG_NM" Type="varchar" MaxLength="62" Nullable="false" />
+          <Property Name="FNM" Type="varchar" MaxLength="62" />
+          <Property Name="LNM" Type="varchar" MaxLength="62" />
+          <Property Name="EMAILADDR" Type="varchar" MaxLength="126" Nullable="false" />
+          <Property Name="PHNNUM" Type="varchar" MaxLength="35" />
+          <Property Name="SSA_PIN" Type="char" MaxLength="6" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRSN_ROLE_ASGNT">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_ASGNT_UID" />
+          </Key>
+          <Property Name="PRSN_ROLE_ASGNT_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ASGNE_PRSN_ID" Type="int" Nullable="false" />
+          <Property Name="PRSN_ROLE_CD" Type="char" MaxLength="4" />
+          <Property Name="ASGND_DTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRSN_ROLE_CD_REF">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_CD" />
+          </Key>
+          <Property Name="PRSN_ROLE_CD" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="EVNT_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="PRSN_ROLE_CDESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRSRPRTCPN">
+          <Key>
+            <PropertyRef Name="PRSRPRTCPN_UID" />
+          </Key>
+          <Property Name="PRSRPRTCPN_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RCURPATRN_SESN_UID" Type="int" Nullable="false" />
+          <Property Name="PRTCPG_PRSN_ID" Type="int" Nullable="false" />
+          <Property Name="PRSN_ROLE_CD" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="PRTCPD_DTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RCURPATRN">
+          <Key>
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="RCURPATRN_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RCURPSINTVL_CNT" Type="int" Nullable="false" />
+          <Property Name="RCURPATRN_CNT" Type="int" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="CNCLD_DTM" Type="datetime2" Precision="7" />
+          <Property Name="RCURPATRN_TYP_UID" Type="int" Nullable="false" />
+          <Property Name="EVNT_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RCURPATRN_SESN">
+          <Key>
+            <PropertyRef Name="RCURPATRN_SESN_UID" />
+          </Key>
+          <Property Name="RCURPATRN_SESN_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CNCLN_DTM" Type="datetime2" Precision="7" />
+          <Property Name="ORIGL_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="RSCHD_DTM" Type="datetime2" Precision="7" />
+          <Property Name="RCURPATRN_UID" Type="int" Nullable="false" />
+          <Property Name="RCURPATRN_CYCL_ID" Type="int" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="LOC_TXT" Type="varchar" MaxLength="254" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SESN_DESC" Type="varchar" MaxLength="254" />
+        </EntityType>
+        <EntityType Name="RCURPATRN_TYP_REF">
+          <Key>
+            <PropertyRef Name="RCURPATRN_TYP_UID" />
+          </Key>
+          <Property Name="RCURPATRN_TYP_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RCURPATRN_TPDESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SESN_WEB_RSRC">
+          <Key>
+            <PropertyRef Name="RCURPATRN_SESN_UID" />
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="RCURPATRN_SESN_UID" Type="int" Nullable="false" />
+          <Property Name="WEB_RSRC_UID" Type="int" Nullable="false" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WEB_RSRC">
+          <Key>
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="WEB_RSRC_UID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WEB_RSRC_NM" Type="char" MaxLength="150" />
+          <Property Name="WEB_RSRC_DESC" Type="varchar" MaxLength="254" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="URL_ADDR" Type="varchar" MaxLength="2083" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WK_REF">
+          <Key>
+            <PropertyRef Name="WK_UID" />
+          </Key>
+          <Property Name="WK_UID" Type="int" Nullable="false" />
+          <Property Name="WK_DESC" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="MNTH_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="ANNL_SCP_SW" Type="bit" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="datetime2" Precision="7" />
+          <Property Name="INSRT_TS" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LU_TS" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <End Role="DAY_REF" Type="Self.DAY_REF" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Type="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAY_REF">
+              <PropertyRef Name="DAY_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+              <PropertyRef Name="DAY_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="EVNT_PRSN_ROLE_MAX_CNT" Type="Self.EVNT_PRSN_ROLE_MAX_CNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="EVNT_PRSN_ROLE_MAX_CNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_EVNT_WEB_RSRC">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="EVNT_WEB_RSRC" Type="Self.EVNT_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="EVNT_WEB_RSRC">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_PRERASGNT">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="0..1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_RCURPATRN">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_TYP_CD_REF_EVNT">
+          <End Role="EVNT_TYP_CD_REF" Type="Self.EVNT_TYP_CD_REF" Multiplicity="0..1" />
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT_TYP_CD_REF">
+              <PropertyRef Name="EVNT_TYP_CD" />
+            </Principal>
+            <Dependent Role="EVNT">
+              <PropertyRef Name="EVNT_TYP_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MNTH_REF_ANNL_RCURPATRN_MNTHS">
+          <End Role="MNTH_REF" Type="Self.MNTH_REF" Multiplicity="1" />
+          <End Role="ANNL_RCURPATRN_MNTHS" Type="Self.ANNL_RCURPATRN_MNTHS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MNTH_REF">
+              <PropertyRef Name="MNTH_UID" />
+            </Principal>
+            <Dependent Role="ANNL_RCURPATRN_MNTHS">
+              <PropertyRef Name="MNTH_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRERASGN">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="ASGNE_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRSN_ROLE_ASGNT">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRSN_ROLE_ASGNT" Type="Self.PRSN_ROLE_ASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRSN_ROLE_ASGNT">
+              <PropertyRef Name="ASGNE_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRSRPRTCPN">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="PRTCPG_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="1" />
+          <End Role="EVNT_PRSN_ROLE_MAX_CNT" Type="Self.EVNT_PRSN_ROLE_MAX_CNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="EVNT_PRSN_ROLE_MAX_CNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRERASGNT ">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="0..1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="0..1" />
+          <End Role="PRSN_ROLE_ASGNT" Type="Self.PRSN_ROLE_ASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRSN_ROLE_ASGNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRSRPRTCPN">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Type="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" Type="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_RCURPATRN_WKS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_RCURPATRN_MNTHS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_RCURPATRN_MNTHS" Type="Self.ANNL_RCURPATRN_MNTHS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_RCURPATRN_MNTHS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_RCURPATRN_SESN">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_SESN_PRSRPRTCPN">
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_SESN_SESN_WEB_RSRC">
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="1" />
+          <End Role="SESN_WEB_RSRC" Type="Self.SESN_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Principal>
+            <Dependent Role="SESN_WEB_RSRC">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_TYP_REF_RCURPATRN">
+          <End Role="RCURPATRN_TYP_REF" Type="Self.RCURPATRN_TYP_REF" Multiplicity="1" />
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_TYP_REF">
+              <PropertyRef Name="RCURPATRN_TYP_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_TYP_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WEB_RSRC_EVNT_WEB_RSRC">
+          <End Role="WEB_RSRC" Type="Self.WEB_RSRC" Multiplicity="1" />
+          <End Role="EVNT_WEB_RSRC" Type="Self.EVNT_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Principal>
+            <Dependent Role="EVNT_WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WEB_RSRC_SESN_WEB_RSRC">
+          <End Role="WEB_RSRC" Type="Self.WEB_RSRC" Multiplicity="1" />
+          <End Role="SESN_WEB_RSRC" Type="Self.SESN_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Principal>
+            <Dependent Role="SESN_WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <End Role="WK_REF" Type="Self.WK_REF" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" Type="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WK_REF">
+              <PropertyRef Name="WK_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_RCURPATRN_WKS">
+              <PropertyRef Name="WK_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dELSO3AModelStoreContainer">
+          <EntitySet Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntityType="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANNL_AND_MNTHL_RCURPATRN_WKS" EntityType="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ANNL_RCURPATRN_MNTHS" EntityType="Self.ANNL_RCURPATRN_MNTHS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DAY_REF" EntityType="Self.DAY_REF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVNT" EntityType="Self.EVNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVNT_PRSN_ROLE_MAX_CNT" EntityType="Self.EVNT_PRSN_ROLE_MAX_CNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVNT_TYP_CD_REF" EntityType="Self.EVNT_TYP_CD_REF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVNT_WEB_RSRC" EntityType="Self.EVNT_WEB_RSRC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MNTH_REF" EntityType="Self.MNTH_REF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRERASGNT" EntityType="Self.PRERASGNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRSN" EntityType="Self.PRSN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRSN_ROLE_ASGNT" EntityType="Self.PRSN_ROLE_ASGNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRSN_ROLE_CD_REF" EntityType="Self.PRSN_ROLE_CD_REF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRSRPRTCPN" EntityType="Self.PRSRPRTCPN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RCURPATRN" EntityType="Self.RCURPATRN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RCURPATRN_SESN" EntityType="Self.RCURPATRN_SESN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RCURPATRN_TYP_REF" EntityType="Self.RCURPATRN_TYP_REF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SESN_WEB_RSRC" EntityType="Self.SESN_WEB_RSRC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WEB_RSRC" EntityType="Self.WEB_RSRC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WK_REF" EntityType="Self.WK_REF" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Association="Self.FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+            <End Role="DAY_REF" EntitySet="DAY_REF" />
+            <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntitySet="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT" Association="Self.FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT">
+            <End Role="EVNT" EntitySet="EVNT" />
+            <End Role="EVNT_PRSN_ROLE_MAX_CNT" EntitySet="EVNT_PRSN_ROLE_MAX_CNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_EVNT_WEB_RSRC" Association="Self.FK_EVNT_EVNT_WEB_RSRC">
+            <End Role="EVNT" EntitySet="EVNT" />
+            <End Role="EVNT_WEB_RSRC" EntitySet="EVNT_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_PRERASGNT" Association="Self.FK_EVNT_PRERASGNT">
+            <End Role="EVNT" EntitySet="EVNT" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_RCURPATRN" Association="Self.FK_EVNT_RCURPATRN">
+            <End Role="EVNT" EntitySet="EVNT" />
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_TYP_CD_REF_EVNT" Association="Self.FK_EVNT_TYP_CD_REF_EVNT">
+            <End Role="EVNT_TYP_CD_REF" EntitySet="EVNT_TYP_CD_REF" />
+            <End Role="EVNT" EntitySet="EVNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MNTH_REF_ANNL_RCURPATRN_MNTHS" Association="Self.FK_MNTH_REF_ANNL_RCURPATRN_MNTHS">
+            <End Role="MNTH_REF" EntitySet="MNTH_REF" />
+            <End Role="ANNL_RCURPATRN_MNTHS" EntitySet="ANNL_RCURPATRN_MNTHS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRERASGN" Association="Self.FK_PRSN_PRERASGN">
+            <End Role="PRSN" EntitySet="PRSN" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRSN_ROLE_ASGNT" Association="Self.FK_PRSN_PRSN_ROLE_ASGNT">
+            <End Role="PRSN" EntitySet="PRSN" />
+            <End Role="PRSN_ROLE_ASGNT" EntitySet="PRSN_ROLE_ASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRSRPRTCPN" Association="Self.FK_PRSN_PRSRPRTCPN">
+            <End Role="PRSN" EntitySet="PRSN" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT" Association="Self.FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="EVNT_PRSN_ROLE_MAX_CNT" EntitySet="EVNT_PRSN_ROLE_MAX_CNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRERASGNT " Association="Self.FK_PRSN_ROLE_CD_REF_PRERASGNT ">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT" Association="Self.FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRSN_ROLE_ASGNT" EntitySet="PRSN_ROLE_ASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRSRPRTCPN" Association="Self.FK_PRSN_ROLE_CD_REF_PRSRPRTCPN">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Association="Self.FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+            <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntitySet="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS" Association="Self.FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+            <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" EntitySet="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_RCURPATRN_MNTHS" Association="Self.FK_RCURPATRN_ANNL_RCURPATRN_MNTHS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+            <End Role="ANNL_RCURPATRN_MNTHS" EntitySet="ANNL_RCURPATRN_MNTHS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_RCURPATRN_SESN" Association="Self.FK_RCURPATRN_RCURPATRN_SESN">
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_SESN_PRSRPRTCPN" Association="Self.FK_RCURPATRN_SESN_PRSRPRTCPN">
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_SESN_SESN_WEB_RSRC" Association="Self.FK_RCURPATRN_SESN_SESN_WEB_RSRC">
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+            <End Role="SESN_WEB_RSRC" EntitySet="SESN_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_TYP_REF_RCURPATRN" Association="Self.FK_RCURPATRN_TYP_REF_RCURPATRN">
+            <End Role="RCURPATRN_TYP_REF" EntitySet="RCURPATRN_TYP_REF" />
+            <End Role="RCURPATRN" EntitySet="RCURPATRN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WEB_RSRC_EVNT_WEB_RSRC" Association="Self.FK_WEB_RSRC_EVNT_WEB_RSRC">
+            <End Role="WEB_RSRC" EntitySet="WEB_RSRC" />
+            <End Role="EVNT_WEB_RSRC" EntitySet="EVNT_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WEB_RSRC_SESN_WEB_RSRC" Association="Self.FK_WEB_RSRC_SESN_WEB_RSRC">
+            <End Role="WEB_RSRC" EntitySet="WEB_RSRC" />
+            <End Role="SESN_WEB_RSRC" EntitySet="SESN_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS" Association="Self.FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS">
+            <End Role="WK_REF" EntitySet="WK_REF" />
+            <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" EntitySet="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dELSO3AModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <Key>
+            <PropertyRef Name="DAY_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="DAY_UID" Type="Int32" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="DAY_REF" Relationship="Self.FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" FromRole="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" ToRole="DAY_REF" />
+          <NavigationProperty Name="RCURPATRN" Relationship="Self.FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" FromRole="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" ToRole="RCURPATRN" />
+        </EntityType>
+        <EntityType Name="ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <Key>
+            <PropertyRef Name="WK_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="WK_UID" Type="Int32" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="RCURPATRN" Relationship="Self.FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS" FromRole="ANNL_AND_MNTHL_RCURPATRN_WKS" ToRole="RCURPATRN" />
+          <NavigationProperty Name="WK_REF" Relationship="Self.FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS" FromRole="ANNL_AND_MNTHL_RCURPATRN_WKS" ToRole="WK_REF" />
+        </EntityType>
+        <EntityType Name="ANNL_RCURPATRN_MNTHS">
+          <Key>
+            <PropertyRef Name="MNTH_UID" />
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="MNTH_UID" Type="Int32" Nullable="false" />
+          <Property Name="RCURPATRN_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="MNTH_REF" Relationship="Self.FK_MNTH_REF_ANNL_RCURPATRN_MNTHS" FromRole="ANNL_RCURPATRN_MNTHS" ToRole="MNTH_REF" />
+          <NavigationProperty Name="RCURPATRN" Relationship="Self.FK_RCURPATRN_ANNL_RCURPATRN_MNTHS" FromRole="ANNL_RCURPATRN_MNTHS" ToRole="RCURPATRN" />
+        </EntityType>
+        <EntityType Name="DAY_REF">
+          <Key>
+            <PropertyRef Name="DAY_UID" />
+          </Key>
+          <Property Name="DAY_UID" Type="Int32" Nullable="false" />
+          <Property Name="DAY_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WK_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="MNTH_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="ANNL_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Relationship="Self.FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" FromRole="DAY_REF" ToRole="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+        </EntityType>
+        <EntityType Name="EVNT">
+          <Key>
+            <PropertyRef Name="EVNT_UID" />
+          </Key>
+          <Property Name="EVNT_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CNCLN_DTM" Type="DateTime" Precision="7" />
+          <Property Name="EVNT_NM" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EVNT_TYP_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EVNT_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EVNT_PRSN_ROLE_MAX_CNT" Relationship="Self.FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT" FromRole="EVNT" ToRole="EVNT_PRSN_ROLE_MAX_CNT" />
+          <NavigationProperty Name="EVNT_WEB_RSRC" Relationship="Self.FK_EVNT_EVNT_WEB_RSRC" FromRole="EVNT" ToRole="EVNT_WEB_RSRC" />
+          <NavigationProperty Name="PRERASGNTs" Relationship="Self.FK_EVNT_PRERASGNT" FromRole="EVNT" ToRole="PRERASGNT" />
+          <NavigationProperty Name="RCURPATRNs" Relationship="Self.FK_EVNT_RCURPATRN" FromRole="EVNT" ToRole="RCURPATRN" />
+          <NavigationProperty Name="EVNT_TYP_CD_REF" Relationship="Self.FK_EVNT_TYP_CD_REF_EVNT" FromRole="EVNT" ToRole="EVNT_TYP_CD_REF" />
+        </EntityType>
+        <EntityType Name="EVNT_PRSN_ROLE_MAX_CNT">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_CD" />
+            <PropertyRef Name="EVNT_UID" />
+          </Key>
+          <Property Name="PRSN_ROLE_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EVNT_UID" Type="Int32" Nullable="false" />
+          <Property Name="MAX_PRSN_CNT" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EVNT" Relationship="Self.FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT" FromRole="EVNT_PRSN_ROLE_MAX_CNT" ToRole="EVNT" />
+          <NavigationProperty Name="PRSN_ROLE_CD_REF" Relationship="Self.FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT" FromRole="EVNT_PRSN_ROLE_MAX_CNT" ToRole="PRSN_ROLE_CD_REF" />
+        </EntityType>
+        <EntityType Name="EVNT_TYP_CD_REF">
+          <Key>
+            <PropertyRef Name="EVNT_TYP_CD" />
+          </Key>
+          <Property Name="EVNT_TYP_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EVNT_TYP_CDESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EVNTs" Relationship="Self.FK_EVNT_TYP_CD_REF_EVNT" FromRole="EVNT_TYP_CD_REF" ToRole="EVNT" />
+        </EntityType>
+        <EntityType Name="EVNT_WEB_RSRC">
+          <Key>
+            <PropertyRef Name="EVNT_UID" />
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="EVNT_UID" Type="Int32" Nullable="false" />
+          <Property Name="WEB_RSRC_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EVNT" Relationship="Self.FK_EVNT_EVNT_WEB_RSRC" FromRole="EVNT_WEB_RSRC" ToRole="EVNT" />
+          <NavigationProperty Name="WEB_RSRC" Relationship="Self.FK_WEB_RSRC_EVNT_WEB_RSRC" FromRole="EVNT_WEB_RSRC" ToRole="WEB_RSRC" />
+        </EntityType>
+        <EntityType Name="MNTH_REF">
+          <Key>
+            <PropertyRef Name="MNTH_UID" />
+          </Key>
+          <Property Name="MNTH_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MNTH_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ANNL_RCURPATRN_MNTHS" Relationship="Self.FK_MNTH_REF_ANNL_RCURPATRN_MNTHS" FromRole="MNTH_REF" ToRole="ANNL_RCURPATRN_MNTHS" />
+        </EntityType>
+        <EntityType Name="PRERASGNT">
+          <Key>
+            <PropertyRef Name="PRERASGNT_UID" />
+          </Key>
+          <Property Name="PRERASGNT_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASGNE_PRSN_ID" Type="Int32" Nullable="false" />
+          <Property Name="EVNT_UID" Type="Int32" />
+          <Property Name="PRSN_ROLE_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="ASGND_DTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EVNT" Relationship="Self.FK_EVNT_PRERASGNT" FromRole="PRERASGNT" ToRole="EVNT" />
+          <NavigationProperty Name="PRSN" Relationship="Self.FK_PRSN_PRERASGN" FromRole="PRERASGNT" ToRole="PRSN" />
+          <NavigationProperty Name="PRSN_ROLE_CD_REF" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRERASGNT_" FromRole="PRERASGNT" ToRole="PRSN_ROLE_CD_REF" />
+        </EntityType>
+        <EntityType Name="PRSN">
+          <Key>
+            <PropertyRef Name="PRSN_UID" />
+          </Key>
+          <Property Name="PRSN_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORG_NM" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FNM" Type="String" MaxLength="62" FixedLength="false" Unicode="false" />
+          <Property Name="LNM" Type="String" MaxLength="62" FixedLength="false" Unicode="false" />
+          <Property Name="EMAILADDR" Type="String" MaxLength="126" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PHNNUM" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="SSA_PIN" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="PRERASGNTs" Relationship="Self.FK_PRSN_PRERASGN" FromRole="PRSN" ToRole="PRERASGNT" />
+          <NavigationProperty Name="PRSN_ROLE_ASGNT" Relationship="Self.FK_PRSN_PRSN_ROLE_ASGNT" FromRole="PRSN" ToRole="PRSN_ROLE_ASGNT" />
+          <NavigationProperty Name="PRSRPRTCPNs" Relationship="Self.FK_PRSN_PRSRPRTCPN" FromRole="PRSN" ToRole="PRSRPRTCPN" />
+        </EntityType>
+        <EntityType Name="PRSN_ROLE_ASGNT">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_ASGNT_UID" />
+          </Key>
+          <Property Name="PRSN_ROLE_ASGNT_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ASGNE_PRSN_ID" Type="Int32" Nullable="false" />
+          <Property Name="PRSN_ROLE_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="ASGND_DTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="PRSN" Relationship="Self.FK_PRSN_PRSN_ROLE_ASGNT" FromRole="PRSN_ROLE_ASGNT" ToRole="PRSN" />
+          <NavigationProperty Name="PRSN_ROLE_CD_REF" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT" FromRole="PRSN_ROLE_ASGNT" ToRole="PRSN_ROLE_CD_REF" />
+        </EntityType>
+        <EntityType Name="PRSN_ROLE_CD_REF">
+          <Key>
+            <PropertyRef Name="PRSN_ROLE_CD" />
+          </Key>
+          <Property Name="PRSN_ROLE_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="EVNT_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="PRSN_ROLE_CDESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="EVNT_PRSN_ROLE_MAX_CNT" Relationship="Self.FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT" FromRole="PRSN_ROLE_CD_REF" ToRole="EVNT_PRSN_ROLE_MAX_CNT" />
+          <NavigationProperty Name="PRERASGNTs" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRERASGNT_" FromRole="PRSN_ROLE_CD_REF" ToRole="PRERASGNT" />
+          <NavigationProperty Name="PRSN_ROLE_ASGNT" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT" FromRole="PRSN_ROLE_CD_REF" ToRole="PRSN_ROLE_ASGNT" />
+          <NavigationProperty Name="PRSRPRTCPNs" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRSRPRTCPN" FromRole="PRSN_ROLE_CD_REF" ToRole="PRSRPRTCPN" />
+        </EntityType>
+        <EntityType Name="PRSRPRTCPN">
+          <Key>
+            <PropertyRef Name="PRSRPRTCPN_UID" />
+          </Key>
+          <Property Name="PRSRPRTCPN_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RCURPATRN_SESN_UID" Type="Int32" Nullable="false" />
+          <Property Name="PRTCPG_PRSN_ID" Type="Int32" Nullable="false" />
+          <Property Name="PRSN_ROLE_CD" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="PRTCPD_DTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="PRSN" Relationship="Self.FK_PRSN_PRSRPRTCPN" FromRole="PRSRPRTCPN" ToRole="PRSN" />
+          <NavigationProperty Name="PRSN_ROLE_CD_REF" Relationship="Self.FK_PRSN_ROLE_CD_REF_PRSRPRTCPN" FromRole="PRSRPRTCPN" ToRole="PRSN_ROLE_CD_REF" />
+          <NavigationProperty Name="RCURPATRN_SESN" Relationship="Self.FK_RCURPATRN_SESN_PRSRPRTCPN" FromRole="PRSRPRTCPN" ToRole="RCURPATRN_SESN" />
+        </EntityType>
+        <EntityType Name="RCURPATRN">
+          <Key>
+            <PropertyRef Name="RCURPATRN_UID" />
+          </Key>
+          <Property Name="RCURPATRN_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RCURPSINTVL_CNT" Type="Int32" Nullable="false" />
+          <Property Name="RCURPATRN_CNT" Type="Int32" Nullable="false" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="CNCLD_DTM" Type="DateTime" Precision="7" />
+          <Property Name="RCURPATRN_TYP_UID" Type="Int32" Nullable="false" />
+          <Property Name="EVNT_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Relationship="Self.FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" FromRole="RCURPATRN" ToRole="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          <NavigationProperty Name="ANNL_AND_MNTHL_RCURPATRN_WKS" Relationship="Self.FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS" FromRole="RCURPATRN" ToRole="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          <NavigationProperty Name="ANNL_RCURPATRN_MNTHS" Relationship="Self.FK_RCURPATRN_ANNL_RCURPATRN_MNTHS" FromRole="RCURPATRN" ToRole="ANNL_RCURPATRN_MNTHS" />
+          <NavigationProperty Name="EVNT" Relationship="Self.FK_EVNT_RCURPATRN" FromRole="RCURPATRN" ToRole="EVNT" />
+          <NavigationProperty Name="RCURPATRN_SESN" Relationship="Self.FK_RCURPATRN_RCURPATRN_SESN" FromRole="RCURPATRN" ToRole="RCURPATRN_SESN" />
+          <NavigationProperty Name="RCURPATRN_TYP_REF" Relationship="Self.FK_RCURPATRN_TYP_REF_RCURPATRN" FromRole="RCURPATRN" ToRole="RCURPATRN_TYP_REF" />
+        </EntityType>
+        <EntityType Name="RCURPATRN_SESN">
+          <Key>
+            <PropertyRef Name="RCURPATRN_SESN_UID" />
+          </Key>
+          <Property Name="RCURPATRN_SESN_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CNCLN_DTM" Type="DateTime" Precision="7" />
+          <Property Name="ORIGL_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="RSCHD_DTM" Type="DateTime" Precision="7" />
+          <Property Name="RCURPATRN_UID" Type="Int32" Nullable="false" />
+          <Property Name="RCURPATRN_CYCL_ID" Type="Int32" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="LOC_TXT" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="SESN_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PRSRPRTCPNs" Relationship="Self.FK_RCURPATRN_SESN_PRSRPRTCPN" FromRole="RCURPATRN_SESN" ToRole="PRSRPRTCPN" />
+          <NavigationProperty Name="RCURPATRN" Relationship="Self.FK_RCURPATRN_RCURPATRN_SESN" FromRole="RCURPATRN_SESN" ToRole="RCURPATRN" />
+          <NavigationProperty Name="SESN_WEB_RSRC" Relationship="Self.FK_RCURPATRN_SESN_SESN_WEB_RSRC" FromRole="RCURPATRN_SESN" ToRole="SESN_WEB_RSRC" />
+        </EntityType>
+        <EntityType Name="RCURPATRN_TYP_REF">
+          <Key>
+            <PropertyRef Name="RCURPATRN_TYP_UID" />
+          </Key>
+          <Property Name="RCURPATRN_TYP_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RCURPATRN_TPDESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="RCURPATRNs" Relationship="Self.FK_RCURPATRN_TYP_REF_RCURPATRN" FromRole="RCURPATRN_TYP_REF" ToRole="RCURPATRN" />
+        </EntityType>
+        <EntityType Name="SESN_WEB_RSRC">
+          <Key>
+            <PropertyRef Name="RCURPATRN_SESN_UID" />
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="RCURPATRN_SESN_UID" Type="Int32" Nullable="false" />
+          <Property Name="WEB_RSRC_UID" Type="Int32" Nullable="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="RCURPATRN_SESN" Relationship="Self.FK_RCURPATRN_SESN_SESN_WEB_RSRC" FromRole="SESN_WEB_RSRC" ToRole="RCURPATRN_SESN" />
+          <NavigationProperty Name="WEB_RSRC" Relationship="Self.FK_WEB_RSRC_SESN_WEB_RSRC" FromRole="SESN_WEB_RSRC" ToRole="WEB_RSRC" />
+        </EntityType>
+        <EntityType Name="WEB_RSRC">
+          <Key>
+            <PropertyRef Name="WEB_RSRC_UID" />
+          </Key>
+          <Property Name="WEB_RSRC_UID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WEB_RSRC_NM" Type="String" MaxLength="150" FixedLength="true" Unicode="false" />
+          <Property Name="WEB_RSRC_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="URL_ADDR" Type="String" MaxLength="2083" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EVNT_WEB_RSRC" Relationship="Self.FK_WEB_RSRC_EVNT_WEB_RSRC" FromRole="WEB_RSRC" ToRole="EVNT_WEB_RSRC" />
+          <NavigationProperty Name="SESN_WEB_RSRC" Relationship="Self.FK_WEB_RSRC_SESN_WEB_RSRC" FromRole="WEB_RSRC" ToRole="SESN_WEB_RSRC" />
+        </EntityType>
+        <EntityType Name="WK_REF">
+          <Key>
+            <PropertyRef Name="WK_UID" />
+          </Key>
+          <Property Name="WK_UID" Type="Int32" Nullable="false" />
+          <Property Name="WK_DESC" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MNTH_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="ANNL_SCP_SW" Type="Boolean" Nullable="false" />
+          <Property Name="EFF_STDTM" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EFF_ENDTM" Type="DateTime" Precision="7" />
+          <Property Name="INSRT_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="LU_TS" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="ANNL_AND_MNTHL_RCURPATRN_WKS" Relationship="Self.FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS" FromRole="WK_REF" ToRole="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+        </EntityType>
+        <Association Name="FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <End Role="DAY_REF" Type="Self.DAY_REF" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Type="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DAY_REF">
+              <PropertyRef Name="DAY_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+              <PropertyRef Name="DAY_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Type="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" Type="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_RCURPATRN_WKS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS">
+          <End Role="WK_REF" Type="Self.WK_REF" Multiplicity="1" />
+          <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" Type="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WK_REF">
+              <PropertyRef Name="WK_UID" />
+            </Principal>
+            <Dependent Role="ANNL_AND_MNTHL_RCURPATRN_WKS">
+              <PropertyRef Name="WK_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MNTH_REF_ANNL_RCURPATRN_MNTHS">
+          <End Role="MNTH_REF" Type="Self.MNTH_REF" Multiplicity="1" />
+          <End Role="ANNL_RCURPATRN_MNTHS" Type="Self.ANNL_RCURPATRN_MNTHS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MNTH_REF">
+              <PropertyRef Name="MNTH_UID" />
+            </Principal>
+            <Dependent Role="ANNL_RCURPATRN_MNTHS">
+              <PropertyRef Name="MNTH_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_ANNL_RCURPATRN_MNTHS">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="ANNL_RCURPATRN_MNTHS" Type="Self.ANNL_RCURPATRN_MNTHS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="ANNL_RCURPATRN_MNTHS">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="EVNT_PRSN_ROLE_MAX_CNT" Type="Self.EVNT_PRSN_ROLE_MAX_CNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="EVNT_PRSN_ROLE_MAX_CNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_EVNT_WEB_RSRC">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="EVNT_WEB_RSRC" Type="Self.EVNT_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="EVNT_WEB_RSRC">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_PRERASGNT">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="0..1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_RCURPATRN">
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="1" />
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT">
+              <PropertyRef Name="EVNT_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN">
+              <PropertyRef Name="EVNT_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EVNT_TYP_CD_REF_EVNT">
+          <End Role="EVNT_TYP_CD_REF" Type="Self.EVNT_TYP_CD_REF" Multiplicity="0..1" />
+          <End Role="EVNT" Type="Self.EVNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVNT_TYP_CD_REF">
+              <PropertyRef Name="EVNT_TYP_CD" />
+            </Principal>
+            <Dependent Role="EVNT">
+              <PropertyRef Name="EVNT_TYP_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="1" />
+          <End Role="EVNT_PRSN_ROLE_MAX_CNT" Type="Self.EVNT_PRSN_ROLE_MAX_CNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="EVNT_PRSN_ROLE_MAX_CNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WEB_RSRC_EVNT_WEB_RSRC">
+          <End Role="WEB_RSRC" Type="Self.WEB_RSRC" Multiplicity="1" />
+          <End Role="EVNT_WEB_RSRC" Type="Self.EVNT_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Principal>
+            <Dependent Role="EVNT_WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRERASGN">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="ASGNE_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRERASGNT_">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="0..1" />
+          <End Role="PRERASGNT" Type="Self.PRERASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRERASGNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRSN_ROLE_ASGNT">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRSN_ROLE_ASGNT" Type="Self.PRSN_ROLE_ASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRSN_ROLE_ASGNT">
+              <PropertyRef Name="ASGNE_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_PRSRPRTCPN">
+          <End Role="PRSN" Type="Self.PRSN" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN">
+              <PropertyRef Name="PRSN_UID" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="PRTCPG_PRSN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="0..1" />
+          <End Role="PRSN_ROLE_ASGNT" Type="Self.PRSN_ROLE_ASGNT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRSN_ROLE_ASGNT">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRSN_ROLE_CD_REF_PRSRPRTCPN">
+          <End Role="PRSN_ROLE_CD_REF" Type="Self.PRSN_ROLE_CD_REF" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRSN_ROLE_CD_REF">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="PRSN_ROLE_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_SESN_PRSRPRTCPN">
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="1" />
+          <End Role="PRSRPRTCPN" Type="Self.PRSRPRTCPN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Principal>
+            <Dependent Role="PRSRPRTCPN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_RCURPATRN_SESN">
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="1" />
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_TYP_REF_RCURPATRN">
+          <End Role="RCURPATRN_TYP_REF" Type="Self.RCURPATRN_TYP_REF" Multiplicity="1" />
+          <End Role="RCURPATRN" Type="Self.RCURPATRN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_TYP_REF">
+              <PropertyRef Name="RCURPATRN_TYP_UID" />
+            </Principal>
+            <Dependent Role="RCURPATRN">
+              <PropertyRef Name="RCURPATRN_TYP_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RCURPATRN_SESN_SESN_WEB_RSRC">
+          <End Role="RCURPATRN_SESN" Type="Self.RCURPATRN_SESN" Multiplicity="1" />
+          <End Role="SESN_WEB_RSRC" Type="Self.SESN_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RCURPATRN_SESN">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Principal>
+            <Dependent Role="SESN_WEB_RSRC">
+              <PropertyRef Name="RCURPATRN_SESN_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WEB_RSRC_SESN_WEB_RSRC">
+          <End Role="WEB_RSRC" Type="Self.WEB_RSRC" Multiplicity="1" />
+          <End Role="SESN_WEB_RSRC" Type="Self.SESN_WEB_RSRC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Principal>
+            <Dependent Role="SESN_WEB_RSRC">
+              <PropertyRef Name="WEB_RSRC_UID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dELSO3AEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntityType="Self.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          <EntitySet Name="ANNL_AND_MNTHL_RCURPATRN_WKS" EntityType="Self.ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          <EntitySet Name="ANNL_RCURPATRN_MNTHS" EntityType="Self.ANNL_RCURPATRN_MNTHS" />
+          <EntitySet Name="DAY_REF" EntityType="Self.DAY_REF" />
+          <EntitySet Name="EVNTs" EntityType="Self.EVNT" />
+          <EntitySet Name="EVNT_PRSN_ROLE_MAX_CNT" EntityType="Self.EVNT_PRSN_ROLE_MAX_CNT" />
+          <EntitySet Name="EVNT_TYP_CD_REF" EntityType="Self.EVNT_TYP_CD_REF" />
+          <EntitySet Name="EVNT_WEB_RSRC" EntityType="Self.EVNT_WEB_RSRC" />
+          <EntitySet Name="MNTH_REF" EntityType="Self.MNTH_REF" />
+          <EntitySet Name="PRERASGNTs" EntityType="Self.PRERASGNT" />
+          <EntitySet Name="PRSNs" EntityType="Self.PRSN" />
+          <EntitySet Name="PRSN_ROLE_ASGNT" EntityType="Self.PRSN_ROLE_ASGNT" />
+          <EntitySet Name="PRSN_ROLE_CD_REF" EntityType="Self.PRSN_ROLE_CD_REF" />
+          <EntitySet Name="PRSRPRTCPNs" EntityType="Self.PRSRPRTCPN" />
+          <EntitySet Name="RCURPATRNs" EntityType="Self.RCURPATRN" />
+          <EntitySet Name="RCURPATRN_SESN" EntityType="Self.RCURPATRN_SESN" />
+          <EntitySet Name="RCURPATRN_TYP_REF" EntityType="Self.RCURPATRN_TYP_REF" />
+          <EntitySet Name="SESN_WEB_RSRC" EntityType="Self.SESN_WEB_RSRC" />
+          <EntitySet Name="WEB_RSRC" EntityType="Self.WEB_RSRC" />
+          <EntitySet Name="WK_REF" EntityType="Self.WK_REF" />
+          <AssociationSet Name="FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Association="Self.FK_DAY_REF_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+            <End Role="DAY_REF" EntitySet="DAY_REF" />
+            <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntitySet="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" Association="Self.FK_RCURPATRN_ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+            <End Role="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" EntitySet="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS" Association="Self.FK_RCURPATRN_ANNL_AND_MNTHL_RCURPATRN_WKS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+            <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" EntitySet="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS" Association="Self.FK_WK_REF_ANNL_AND_MNTHL_RCURPATRN_WKS">
+            <End Role="WK_REF" EntitySet="WK_REF" />
+            <End Role="ANNL_AND_MNTHL_RCURPATRN_WKS" EntitySet="ANNL_AND_MNTHL_RCURPATRN_WKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MNTH_REF_ANNL_RCURPATRN_MNTHS" Association="Self.FK_MNTH_REF_ANNL_RCURPATRN_MNTHS">
+            <End Role="MNTH_REF" EntitySet="MNTH_REF" />
+            <End Role="ANNL_RCURPATRN_MNTHS" EntitySet="ANNL_RCURPATRN_MNTHS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_ANNL_RCURPATRN_MNTHS" Association="Self.FK_RCURPATRN_ANNL_RCURPATRN_MNTHS">
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+            <End Role="ANNL_RCURPATRN_MNTHS" EntitySet="ANNL_RCURPATRN_MNTHS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT" Association="Self.FK_EVNT_EVNT_PRSN_ROLE_MAX_CNT">
+            <End Role="EVNT" EntitySet="EVNTs" />
+            <End Role="EVNT_PRSN_ROLE_MAX_CNT" EntitySet="EVNT_PRSN_ROLE_MAX_CNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_EVNT_WEB_RSRC" Association="Self.FK_EVNT_EVNT_WEB_RSRC">
+            <End Role="EVNT" EntitySet="EVNTs" />
+            <End Role="EVNT_WEB_RSRC" EntitySet="EVNT_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_PRERASGNT" Association="Self.FK_EVNT_PRERASGNT">
+            <End Role="EVNT" EntitySet="EVNTs" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_RCURPATRN" Association="Self.FK_EVNT_RCURPATRN">
+            <End Role="EVNT" EntitySet="EVNTs" />
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EVNT_TYP_CD_REF_EVNT" Association="Self.FK_EVNT_TYP_CD_REF_EVNT">
+            <End Role="EVNT_TYP_CD_REF" EntitySet="EVNT_TYP_CD_REF" />
+            <End Role="EVNT" EntitySet="EVNTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT" Association="Self.FK_PRSN_ROLE_CD_REF_EVNT_PRSN_ROLE_MAX_CNT">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="EVNT_PRSN_ROLE_MAX_CNT" EntitySet="EVNT_PRSN_ROLE_MAX_CNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WEB_RSRC_EVNT_WEB_RSRC" Association="Self.FK_WEB_RSRC_EVNT_WEB_RSRC">
+            <End Role="WEB_RSRC" EntitySet="WEB_RSRC" />
+            <End Role="EVNT_WEB_RSRC" EntitySet="EVNT_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRERASGN" Association="Self.FK_PRSN_PRERASGN">
+            <End Role="PRSN" EntitySet="PRSNs" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRERASGNT_" Association="Self.FK_PRSN_ROLE_CD_REF_PRERASGNT_">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRERASGNT" EntitySet="PRERASGNTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRSN_ROLE_ASGNT" Association="Self.FK_PRSN_PRSN_ROLE_ASGNT">
+            <End Role="PRSN" EntitySet="PRSNs" />
+            <End Role="PRSN_ROLE_ASGNT" EntitySet="PRSN_ROLE_ASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_PRSRPRTCPN" Association="Self.FK_PRSN_PRSRPRTCPN">
+            <End Role="PRSN" EntitySet="PRSNs" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT" Association="Self.FK_PRSN_ROLE_CD_REF_PRSN_ROLE_ASGNT">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRSN_ROLE_ASGNT" EntitySet="PRSN_ROLE_ASGNT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRSN_ROLE_CD_REF_PRSRPRTCPN" Association="Self.FK_PRSN_ROLE_CD_REF_PRSRPRTCPN">
+            <End Role="PRSN_ROLE_CD_REF" EntitySet="PRSN_ROLE_CD_REF" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_SESN_PRSRPRTCPN" Association="Self.FK_RCURPATRN_SESN_PRSRPRTCPN">
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+            <End Role="PRSRPRTCPN" EntitySet="PRSRPRTCPNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_RCURPATRN_SESN" Association="Self.FK_RCURPATRN_RCURPATRN_SESN">
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_TYP_REF_RCURPATRN" Association="Self.FK_RCURPATRN_TYP_REF_RCURPATRN">
+            <End Role="RCURPATRN_TYP_REF" EntitySet="RCURPATRN_TYP_REF" />
+            <End Role="RCURPATRN" EntitySet="RCURPATRNs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RCURPATRN_SESN_SESN_WEB_RSRC" Association="Self.FK_RCURPATRN_SESN_SESN_WEB_RSRC">
+            <End Role="RCURPATRN_SESN" EntitySet="RCURPATRN_SESN" />
+            <End Role="SESN_WEB_RSRC" EntitySet="SESN_WEB_RSRC" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WEB_RSRC_SESN_WEB_RSRC" Association="Self.FK_WEB_RSRC_SESN_WEB_RSRC">
+            <End Role="WEB_RSRC" EntitySet="WEB_RSRC" />
+            <End Role="SESN_WEB_RSRC" EntitySet="SESN_WEB_RSRC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dELSO3AModelStoreContainer" CdmEntityContainer="dELSO3AEntities">
+          <EntitySetMapping Name="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+            <EntityTypeMapping TypeName="dELSO3AModel.ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+              <MappingFragment StoreEntitySet="ANNL_AND_MNTHL_AND_WKLRCUR_PATRN_DAYS">
+                <ScalarProperty Name="DAY_UID" ColumnName="DAY_UID" />
+                <ScalarProperty Name="RCURPATRN_UID" ColumnName="RCURPATRN_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANNL_AND_MNTHL_RCURPATRN_WKS">
+            <EntityTypeMapping TypeName="dELSO3AModel.ANNL_AND_MNTHL_RCURPATRN_WKS">
+              <MappingFragment StoreEntitySet="ANNL_AND_MNTHL_RCURPATRN_WKS">
+                <ScalarProperty Name="WK_UID" ColumnName="WK_UID" />
+                <ScalarProperty Name="RCURPATRN_UID" ColumnName="RCURPATRN_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ANNL_RCURPATRN_MNTHS">
+            <EntityTypeMapping TypeName="dELSO3AModel.ANNL_RCURPATRN_MNTHS">
+              <MappingFragment StoreEntitySet="ANNL_RCURPATRN_MNTHS">
+                <ScalarProperty Name="MNTH_UID" ColumnName="MNTH_UID" />
+                <ScalarProperty Name="RCURPATRN_UID" ColumnName="RCURPATRN_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DAY_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.DAY_REF">
+              <MappingFragment StoreEntitySet="DAY_REF">
+                <ScalarProperty Name="DAY_UID" ColumnName="DAY_UID" />
+                <ScalarProperty Name="DAY_DESC" ColumnName="DAY_DESC" />
+                <ScalarProperty Name="WK_SCP_SW" ColumnName="WK_SCP_SW" />
+                <ScalarProperty Name="MNTH_SCP_SW" ColumnName="MNTH_SCP_SW" />
+                <ScalarProperty Name="ANNL_SCP_SW" ColumnName="ANNL_SCP_SW" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVNTs">
+            <EntityTypeMapping TypeName="dELSO3AModel.EVNT">
+              <MappingFragment StoreEntitySet="EVNT">
+                <ScalarProperty Name="EVNT_UID" ColumnName="EVNT_UID" />
+                <ScalarProperty Name="CNCLN_DTM" ColumnName="CNCLN_DTM" />
+                <ScalarProperty Name="EVNT_NM" ColumnName="EVNT_NM" />
+                <ScalarProperty Name="EVNT_TYP_CD" ColumnName="EVNT_TYP_CD" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+                <ScalarProperty Name="EVNT_DESC" ColumnName="EVNT_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVNT_PRSN_ROLE_MAX_CNT">
+            <EntityTypeMapping TypeName="dELSO3AModel.EVNT_PRSN_ROLE_MAX_CNT">
+              <MappingFragment StoreEntitySet="EVNT_PRSN_ROLE_MAX_CNT">
+                <ScalarProperty Name="PRSN_ROLE_CD" ColumnName="PRSN_ROLE_CD" />
+                <ScalarProperty Name="EVNT_UID" ColumnName="EVNT_UID" />
+                <ScalarProperty Name="MAX_PRSN_CNT" ColumnName="MAX_PRSN_CNT" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVNT_TYP_CD_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.EVNT_TYP_CD_REF">
+              <MappingFragment StoreEntitySet="EVNT_TYP_CD_REF">
+                <ScalarProperty Name="EVNT_TYP_CD" ColumnName="EVNT_TYP_CD" />
+                <ScalarProperty Name="EVNT_TYP_CDESC" ColumnName="EVNT_TYP_CDESC" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVNT_WEB_RSRC">
+            <EntityTypeMapping TypeName="dELSO3AModel.EVNT_WEB_RSRC">
+              <MappingFragment StoreEntitySet="EVNT_WEB_RSRC">
+                <ScalarProperty Name="EVNT_UID" ColumnName="EVNT_UID" />
+                <ScalarProperty Name="WEB_RSRC_UID" ColumnName="WEB_RSRC_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MNTH_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.MNTH_REF">
+              <MappingFragment StoreEntitySet="MNTH_REF">
+                <ScalarProperty Name="MNTH_UID" ColumnName="MNTH_UID" />
+                <ScalarProperty Name="MNTH_DESC" ColumnName="MNTH_DESC" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRERASGNTs">
+            <EntityTypeMapping TypeName="dELSO3AModel.PRERASGNT">
+              <MappingFragment StoreEntitySet="PRERASGNT">
+                <ScalarProperty Name="PRERASGNT_UID" ColumnName="PRERASGNT_UID" />
+                <ScalarProperty Name="ASGNE_PRSN_ID" ColumnName="ASGNE_PRSN_ID" />
+                <ScalarProperty Name="EVNT_UID" ColumnName="EVNT_UID" />
+                <ScalarProperty Name="PRSN_ROLE_CD" ColumnName="PRSN_ROLE_CD" />
+                <ScalarProperty Name="ASGND_DTM" ColumnName="ASGND_DTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRSNs">
+            <EntityTypeMapping TypeName="dELSO3AModel.PRSN">
+              <MappingFragment StoreEntitySet="PRSN">
+                <ScalarProperty Name="PRSN_UID" ColumnName="PRSN_UID" />
+                <ScalarProperty Name="ORG_NM" ColumnName="ORG_NM" />
+                <ScalarProperty Name="FNM" ColumnName="FNM" />
+                <ScalarProperty Name="LNM" ColumnName="LNM" />
+                <ScalarProperty Name="EMAILADDR" ColumnName="EMAILADDR" />
+                <ScalarProperty Name="PHNNUM" ColumnName="PHNNUM" />
+                <ScalarProperty Name="SSA_PIN" ColumnName="SSA_PIN" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRSN_ROLE_ASGNT">
+            <EntityTypeMapping TypeName="dELSO3AModel.PRSN_ROLE_ASGNT">
+              <MappingFragment StoreEntitySet="PRSN_ROLE_ASGNT">
+                <ScalarProperty Name="PRSN_ROLE_ASGNT_UID" ColumnName="PRSN_ROLE_ASGNT_UID" />
+                <ScalarProperty Name="ASGNE_PRSN_ID" ColumnName="ASGNE_PRSN_ID" />
+                <ScalarProperty Name="PRSN_ROLE_CD" ColumnName="PRSN_ROLE_CD" />
+                <ScalarProperty Name="ASGND_DTM" ColumnName="ASGND_DTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRSN_ROLE_CD_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.PRSN_ROLE_CD_REF">
+              <MappingFragment StoreEntitySet="PRSN_ROLE_CD_REF">
+                <ScalarProperty Name="PRSN_ROLE_CD" ColumnName="PRSN_ROLE_CD" />
+                <ScalarProperty Name="EVNT_SCP_SW" ColumnName="EVNT_SCP_SW" />
+                <ScalarProperty Name="PRSN_ROLE_CDESC" ColumnName="PRSN_ROLE_CDESC" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRSRPRTCPNs">
+            <EntityTypeMapping TypeName="dELSO3AModel.PRSRPRTCPN">
+              <MappingFragment StoreEntitySet="PRSRPRTCPN">
+                <ScalarProperty Name="PRSRPRTCPN_UID" ColumnName="PRSRPRTCPN_UID" />
+                <ScalarProperty Name="RCURPATRN_SESN_UID" ColumnName="RCURPATRN_SESN_UID" />
+                <ScalarProperty Name="PRTCPG_PRSN_ID" ColumnName="PRTCPG_PRSN_ID" />
+                <ScalarProperty Name="PRSN_ROLE_CD" ColumnName="PRSN_ROLE_CD" />
+                <ScalarProperty Name="PRTCPD_DTM" ColumnName="PRTCPD_DTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RCURPATRNs">
+            <EntityTypeMapping TypeName="dELSO3AModel.RCURPATRN">
+              <MappingFragment StoreEntitySet="RCURPATRN">
+                <ScalarProperty Name="RCURPATRN_UID" ColumnName="RCURPATRN_UID" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="RCURPSINTVL_CNT" ColumnName="RCURPSINTVL_CNT" />
+                <ScalarProperty Name="RCURPATRN_CNT" ColumnName="RCURPATRN_CNT" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="CNCLD_DTM" ColumnName="CNCLD_DTM" />
+                <ScalarProperty Name="RCURPATRN_TYP_UID" ColumnName="RCURPATRN_TYP_UID" />
+                <ScalarProperty Name="EVNT_UID" ColumnName="EVNT_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RCURPATRN_SESN">
+            <EntityTypeMapping TypeName="dELSO3AModel.RCURPATRN_SESN">
+              <MappingFragment StoreEntitySet="RCURPATRN_SESN">
+                <ScalarProperty Name="RCURPATRN_SESN_UID" ColumnName="RCURPATRN_SESN_UID" />
+                <ScalarProperty Name="CNCLN_DTM" ColumnName="CNCLN_DTM" />
+                <ScalarProperty Name="ORIGL_STDTM" ColumnName="ORIGL_STDTM" />
+                <ScalarProperty Name="RSCHD_DTM" ColumnName="RSCHD_DTM" />
+                <ScalarProperty Name="RCURPATRN_UID" ColumnName="RCURPATRN_UID" />
+                <ScalarProperty Name="RCURPATRN_CYCL_ID" ColumnName="RCURPATRN_CYCL_ID" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="LOC_TXT" ColumnName="LOC_TXT" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+                <ScalarProperty Name="SESN_DESC" ColumnName="SESN_DESC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RCURPATRN_TYP_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.RCURPATRN_TYP_REF">
+              <MappingFragment StoreEntitySet="RCURPATRN_TYP_REF">
+                <ScalarProperty Name="RCURPATRN_TYP_UID" ColumnName="RCURPATRN_TYP_UID" />
+                <ScalarProperty Name="RCURPATRN_TPDESC" ColumnName="RCURPATRN_TPDESC" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SESN_WEB_RSRC">
+            <EntityTypeMapping TypeName="dELSO3AModel.SESN_WEB_RSRC">
+              <MappingFragment StoreEntitySet="SESN_WEB_RSRC">
+                <ScalarProperty Name="RCURPATRN_SESN_UID" ColumnName="RCURPATRN_SESN_UID" />
+                <ScalarProperty Name="WEB_RSRC_UID" ColumnName="WEB_RSRC_UID" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WEB_RSRC">
+            <EntityTypeMapping TypeName="dELSO3AModel.WEB_RSRC">
+              <MappingFragment StoreEntitySet="WEB_RSRC">
+                <ScalarProperty Name="WEB_RSRC_UID" ColumnName="WEB_RSRC_UID" />
+                <ScalarProperty Name="WEB_RSRC_NM" ColumnName="WEB_RSRC_NM" />
+                <ScalarProperty Name="WEB_RSRC_DESC" ColumnName="WEB_RSRC_DESC" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+                <ScalarProperty Name="URL_ADDR" ColumnName="URL_ADDR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WK_REF">
+            <EntityTypeMapping TypeName="dELSO3AModel.WK_REF">
+              <MappingFragment StoreEntitySet="WK_REF">
+                <ScalarProperty Name="WK_UID" ColumnName="WK_UID" />
+                <ScalarProperty Name="WK_DESC" ColumnName="WK_DESC" />
+                <ScalarProperty Name="MNTH_SCP_SW" ColumnName="MNTH_SCP_SW" />
+                <ScalarProperty Name="ANNL_SCP_SW" ColumnName="ANNL_SCP_SW" />
+                <ScalarProperty Name="EFF_STDTM" ColumnName="EFF_STDTM" />
+                <ScalarProperty Name="EFF_ENDTM" ColumnName="EFF_ENDTM" />
+                <ScalarProperty Name="INSRT_TS" ColumnName="INSRT_TS" />
+                <ScalarProperty Name="LU_TS" ColumnName="LU_TS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

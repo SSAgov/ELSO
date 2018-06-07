@@ -1,0 +1,94 @@
+﻿
+@{
+
+    var userService = new ELSO.Services.PersonService();
+    var pin = User.Identity.Name.Split('\\')[1];
+    var user = userService.GetFromGAL(pin,"");
+    var name =user.FirstName + " " + user.LastName;
+   
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Electronic Sign-In Sheet</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Fancy/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head >
+<body id = "page-top" >
+    <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top" height="100">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu<i class="fa fa-bars"></i>
+                </button>
+                <h1 class="banner-logo">
+                <a class="navbar-brand page-scroll" href="#page-top"> <img src="~/Content/img/SSAlogoWhite.PNG" width="50" height="50" /> Electronic Sign-In Sheet</a></h1>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        @*<a class="page-scroll" href="#create" title="Create Meeting">Create Meeting</a>*@
+                        @Html.ActionLink("Create Meeting", "Create", "Event", null,
+                       new
+                       {
+                           title = "Create Meeting",
+                           id = "create"
+                       })
+                    </li>   
+                    <li>
+
+                        @*<a href="Event/Create#Events" title="My Meetings">My Meetings</a>*@
+                        @Html.ActionLink("My Meetings", "Create#Events", "Event", null,
+                       new
+                       {
+                           title = "My Meetings",
+                           id = "myMeetings"
+                       })
+                    </li>  
+                    <li>
+                        @*<a id="past" href="Event/Past" title="Past Meetings">Past Meetings</a>*@
+                        @Html.ActionLink("Past Meeting", "Past","Event", null,
+                       new
+                       {
+                           title = "Past Meetings",
+                           id = "past"
+                       })
+                    </li> 
+                    <li>
+                        @Html.ActionLink("Upcoming Meetings", "Upcoming","Event", null,
+                       new {
+                           title ="Upcoming meeting",
+                           id = "upcoming"
+                       })
+
+                    </li> 
+                    <li>
+                        <a title="Contact us by Email" id="contact" href="mailto:"[EMAIL_ADDRESS]"?Subject=Electronic Sign in Sheet" target="_self">Contact us</a>
+                    </li>    
+                    <li>
+                        <a class="page-scroll" href="#" title="Help">Help</a>
+                    </li>              
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    @*<div class="container">*@
+    @RenderBody()
+    @*</div>*@
+   @Html.Partial("_footer") 
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Fancy")
+    @Scripts.Render("~/bundles/Jquerydatatable")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

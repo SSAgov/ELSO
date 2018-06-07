@@ -1,0 +1,638 @@
+﻿@using ELSO.Web.ViewModel
+@model ELSO.Web.ViewModel.EventViewModel
+@{
+    ViewBag.Title = Model.EventName;
+    Layout = "/Views/Shared/_SignInLayout.cshtml";
+ }
+
+<div class="container pageContent">
+    <div class="row">
+        <div class="col-md-12">
+                <div class="row">
+                    @Html.Label("Event Name", new { @for = "EventName", @class = "col-sm-2 col-form-label"})
+                    @Html.DisplayFor(model => model.EventName, new { @class = "form-control-static mb-0 col-sm-10", tabIndex = '0' })
+                </div>
+               <div class="row">
+                    @Html.Label("Location", new { @for = "Location", @class = "col-sm-2 col-form-label" })
+                    @Html.DisplayFor(model => model.Location, new { @class = "form-control-static mb-0 col-sm-10", tabIndex = '0' })
+                </div>
+                <div class="row">
+                    @Html.Label("Start Date", new { @for = "EventStartDate", @class = "col-sm-2 col-form-label" })
+                    @Html.HiddenFor(model => model.EventStartDate)
+                    @Html.DisplayFor(model => model.EventStartDate, new { @class = "form-control-static mb-0 col-sm-10", @tabIndex = '0' })
+                </div>
+            <div class="row">
+                @Html.Label("Start Time", new { @for = "EventStartTime", @class = "col-sm-2 col-form-label" })
+                @Html.DisplayFor(model => model.EventStartTime, new { @class = "form-control-static mb-0 col-sm-10", @tabIndex = '0' })
+            </div>
+            <div class="row">
+                @Html.Label("End Date", new { @for = "EventEndDate", @class = "col-sm-2 col-form-label" })
+                @Html.DisplayFor(model => model.EventEndDate, new { @class = "form-control-static mb-0 col-sm-10", @tabIndex = '0' })
+            </div>
+                <div class="row">
+                    @Html.Label("End Time", new { @for = "EventEndTime", @class = "col-sm-2 col-form-label" })
+                    @Html.DisplayFor(model => model.EventEndTime, new { @class = "form-control-static mb-0 col-sm-10", @tabIndex = '0' })
+                </div>
+            <div class="row">
+                @Html.Label("Meeting Organizer", new { @for = "Meeting Organizer", @class = "col-sm-2 col-form-label" })
+                @Html.Raw(@ViewBag.organizers)
+                </div>
+            @Html.HiddenFor(model => model.IsRegistration)
+            <br />
+                            </div>
+                        </div>
+                    <div class="panel-group" id="accordion">
+                        @if(Model.IsRegistration == true){
+                             <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Registration</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            @if (Model.AttdMxCount != "0")
+                                            {
+                                                @Html.Label("Maximum Registrations for this event :" + Model.AttdMxCount, new { @for = "AttdMxCount", @class = "col-sm-4 col-form-label" })
+                                            }
+                                            else
+                                            {
+                                                @Html.Label("NO Registration Limit", new {@class = "col-sm-4 col-form-label",@tabIndex='0' })
+                                            }
+                                        </div>
+                                          @if (Model.AttdMxCount != "0" && Convert.ToInt16(Model.currentRegCount) >= Convert.ToInt16(Model.AttdMxCount))
+                                                {
+                                                    <div class="row">
+                                                       <input type="hidden" id="regFull" value="True" class="hidden" />
+                                                       @Html.Label("Registration is now closed, please contact the Meeting Organizer for further help", new {@for="RegistrationCount", @class = "col-sm-12 col-form-label", @tabIndex = '0' })
+                                                    </div><br/>
+                                                }
+                                        @if (ViewBag.allowSignIn || ViewBag.IsOrganizer)
+                                        {
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="input-group"> 
+                                                    @Html.Label("Enter Email Address or SSA PIN", new { @for = "regpinEmail", @class = "form-label" })
+                                                    @Html.TextBox("regpinEmail", null, new { @class = "form-control", @placeholder = "Please enter Email Address or SSA PIN", @title = "Please enter Please enter EmailAddress/SSA PIN" })
+                                                    <span class="input-group-btn" id="registerSpan">
+                                                        &nbsp;&nbsp;<input type="button" value="Register" title="Register" tabindex="0" id="register" class="btn btn-primary left" />
+                                                        &nbsp;&nbsp;<input type="submit" value="Unregister" title="Unregister" tabindex="0" id="unregister" class="btn btn-primary left" />
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <p id="regError" class="text-danger"></p>
+                                            </div>
+                                        </div>
+                                        }
+                                        <div class="col-md-12">
+                                            <table id="registerUsers" class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">First Name</th>
+                                                        <th scope="col">Last Name</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Phone Number</th>
+                                                        <th scope="col">Organization</th>
+                                                    </tr>
+                                                </thead>
+                                             </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Attendance</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse2" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                        @if (ViewBag.allowSignIn || ViewBag.IsOrganizer)
+                                        {
+                                            <div class="row">
+                                                @Html.Label(" ", new { @class = "col-sm-8 col-form-label", @id = "SignInMessage", @tabIndex = '0' })
+                                                <br/>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="input-group">
+                                                            @Html.Label("Enter Email Address or SSA PIN", new { @for = "signpinEmail", @class = "form-label" })
+                                                            @Html.TextBox("signpinEmail", null, new { @class = "form-control", @placeholder = "Please enter Email Address or SSA PIN", @title = "Please enter EmailAddress/SSA PIN" })
+                                                            <span class="input-group-btn" id="registerSpan">
+                                                                &nbsp;&nbsp;<input type="button" value="Sign In" title="SignIn" tabindex="0" disabled="disabled" id="signIn" class="btn btn-primary left" />
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <p id="signerror" class="text-danger"></p>
+                                                    </div>
+                                                </div>
+                                                }
+                                                <table id="SignInUsers" class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">First Name</th>
+                                                            <th scope="col">Last Name</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Phone Number</th>
+                                                            <th scope="col">Organization</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+    @*/***************Guest Sign In****************/*@
+    <div class="modal fade" id="addUser-modal" tabindex="-1" role="dialog" aria-labelledby="addUser-modal-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form class="form-horizontal" id="addUser-form">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="addUser-modal-label">Guest Sign In</h4>
+                    </div>
+                    <input type="hidden" id="eType" value="register" class="hidden" />
+                    <div class="modal-body">
+                         <div class="form-group required">
+                            <label for="FirstName" class="col-sm-3 control-label ">First Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="FirstNameModel" name="FirstNameModel" placeholder="Please enter your first name"  required>
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="LastName" class="col-sm-3 control-label">Last Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="LastNameModel" name="LastNameModel" placeholder="Please enter your last name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Phone" class="col-sm-3 control-label ">Phone Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="PhoneModel" name="Phone" placeholder="Please enter your phone number" >
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="Email" class="col-sm-3 control-label">Email Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="EmailModel" name="Email" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group required">
+                            <label for="Organization" class="col-sm-3 control-label">Organization</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="OrganizationModel" name="Organization" placeholder="Please enter your organization" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="addUser" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+             </div>
+    <section id="displayAttendees">
+        
+
+</section>
+
+        @section Scripts{
+<script src="~/Scripts/Plugins/jQuerydatatable/jszip.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                var IsRegistration = $('#IsRegistration').val();
+                var IsOrganizer = '@ViewBag.IsOrganizer';
+                var startDate = Date.parse($('#EventStartDate').val());
+                var today = Date.parse(moment().format("MM/DD/YYYY"));
+                var eventId= @Model.Id;
+                $("#PhoneModel").mask("(999) 999-9999? x99999999999");
+                if(IsRegistration =='True'){
+                    if($('input[id=regFull]').length >0){
+                        $('#register').prop('disabled',true);
+                    }
+                    if(startDate == today){
+                        $('#signIn').removeAttr('disabled');
+                        setKeyPressSign();
+                        disableregistration();
+                    }else if(startDate <today){
+                        disableregistration();
+                    }
+                    else{
+                        $('#SignInMessage').text("Sign In will be available on the day of the meeting");
+                        $('#collapse2').collapse('hide');
+                    }
+                }else{
+                    if(startDate == today){
+                        $('#signIn').removeAttr('disabled');
+                        setKeyPressSign();
+                    }else if(startDate >today){
+                        $('#SignInMessage').text("Sign In will be available on the day of the meeting");
+                    }
+                }
+                if(IsOrganizer =='True'){
+                    // allow onkeypress sigin
+                    setKeyPressSign();
+                    $('#signIn').removeAttr('disabled');
+                    $('#register').prop('disabled',false);
+                    $('#unregister').prop('disabled',false);
+                    $('#SignInMessage').text(" ");
+                }
+                $("#signIn").click(function () {
+                    var pinEmail = $('#signpinEmail').val();
+                    getUserInfo(pinEmail,eventId,"signIn",signIn);
+                });
+                $("#addUser-form").on("submit", function(e){
+                    var firstName = $('#FirstNameModel').val();
+                    var lastName = $('#LastNameModel').val();
+                    var phone = $('#PhoneModel').val();
+                    var email = $('#EmailModel').val();
+                    var organization = $('#OrganizationModel').val();
+                    var eveType = $('#eType').val();
+                    e.preventDefault();
+                    $.ajax({
+                         url: "/Event/addGuest/",
+                         type: "POST",
+                         dataType: "JSON",
+                         data: {
+                                'FirstName': firstName, 'LastName': lastName, 'Phone': phone, 'email': email,
+                                'Organization': organization
+                         },
+                         success: function (data) {
+                                 $('#addUser-modal').modal('hide');
+                                 $("input[type=text]").val("");
+                                 if(eveType == 'register')
+                                      register(data.personId, eventId);
+                                 else if(eveType == 'signIn')
+                                      signIn(data.personId, eventId);
+                                 },
+                         error: function (data) {
+                                        }
+                   });
+                });
+             $('#SignInUsers').DataTable({
+                    ajax:{
+                        url:"/api/Events/GetAttendees",
+                        data: { id: eventId},
+                        type: "GET" ,
+                        dataType: "JSON"
+                    },
+                    dom:'Bfrtip',
+                    responsive: true,
+                    autowidth:false,
+                    buttons:['copy',{
+                        extend:'excelHtml5',
+                        text: 'Export to Excel',
+                        titleAttr: 'Export to Excel',
+                        filename: ' @Model.EventName - Meeting Attendance Sheet',
+                        sheetName:' @Model.EventName',
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var numrows = 8;
+                            var clRow = $('row', sheet);
+                            //update Row
+                            clRow.each(function () {
+                                var attr = $(this).attr('r');
+                                var ind = parseInt(attr);
+                                ind = ind + numrows;
+                                $(this).attr("r", ind);
+                            });
+                            // Create row before data
+                            $('row c ', sheet).each(function (index) {
+                                var attr = $(this).attr('r');
+                                var pre = attr.substring(0, 1);
+                                var ind = parseInt(attr.substring(1, attr.length));
+                                ind = ind + numrows;
+                                $(this).attr("r", pre + ind);
+                            });
+                            function Addrow(index, data) {
+                                var row = sheet.createElement('row');
+                                row.setAttribute("r", index);
+                                for (i = 0; i < data.length; i++) {
+                                    var key = data[i].key;
+                                    var value = data[i].value;
+                                    var c  = sheet.createElement('c');
+                                    c.setAttribute("t", "inlineStr");
+                                    c.setAttribute("s", "2");
+                                    c.setAttribute("r", key + index);
+                                    var is = sheet.createElement('is');
+                                    var t = sheet.createElement('t');
+                                    var text = sheet.createTextNode(value)
+                                    t.appendChild(text);
+                                    is.appendChild(t);
+                                    c.appendChild(is);
+                                    row.appendChild(c);
+                                }
+                                return row;
+                            }
+                            var r1 = Addrow(1, [{ key: 'A', value: 'Event Name:              @Model.EventName'}]);
+                            var r2 = Addrow(2, [{ key: 'A', value: 'Location:                @Model.Location'}]);
+                            var r3 = Addrow(3, [{ key: 'A', value: 'Start Date:       @Model.EventStartDate @Model.EventStartTime' }]);
+                            var r4 = Addrow(4, [{ key: 'A', value: 'End Date:         @Model.EventEndDate  @Model.EventEndTime' }]);
+                            var r5 = Addrow(5, [{ key: 'A', value: 'Meeting Organizer:  @ViewBag.organizers' }]);
+                            var r6 = Addrow(6, [{ key: 'A', value: '' }]);
+                            var r7 = Addrow(7, [{ key: 'A', value: '' }]);
+                            var r8 = Addrow(8, [{ key: 'A', value: '' }]);
+                            var sheetData = sheet.getElementsByTagName('sheetData')[0];
+                            sheetData.insertBefore(r8,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r7,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r6,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r5,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r4,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r3,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r2,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r1,sheetData.childNodes[0]);
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'Export to PDF/Print',
+                        titleAttr: 'Export to PDF/Print',
+                        title:'Meeting Attendance Sheet',
+                        message:"Event Name:            @Model.EventName\n"+"Start Date:                @Model.EventStartDate  @Model.EventStartTime\n"+" End Date:                  @Model.EventEndDate  @Model.EventEndTime\n"+"Meeting Organizer: @ViewBag.organizers\n",
+                        customize: function(doc) {
+                            doc.styles = {
+                                title: { bold: true, fontSize: '12', alignment: 'center' },
+                                tableHeader: { bold: true, fontSize: 11, alignment: 'left',fillColor:'#666666' },
+                                rowEven: { fontSize: 10, fillColor: '#eaeaea' },
+                                rowOdd: { fontSize: 10,fillColor:'#CCCCCC' }
+                            }
+                        }
+                    }
+                    ],
+                    columns: [
+                                  { "data": "FirstName", "autoWidth": true },
+                                  { "data": "LastName", "autoWidth": true },
+                                  { "data": "Email", "autoWidth": true, "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                                       $(nTd).html("<a title='"+oData.Email+"' href='mailto:"+ oData.Email + "?Subject=Electronic Sign in Sheet'>" + oData.Email + "</a>");
+                                  }},
+                                  { "data": "Phone",  "autoWidth": true },
+                                  { "data": "Organization", "autoWidth": true }
+
+                    ]
+                });
+
+                $('.panel-collapse').on('shown.bs.collapse', function (e) {
+                    $(this).parent().find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                    var tableIdToUpdate = $(e.currentTarget).find('.panel-body').find('.table')[0].id;
+                    var divwidth = $('#registerUsers_wrapper').width();
+                    $('#'+tableIdToUpdate).width(divwidth);
+                    // $('#'+tableIdToUpdate).DataTable().columns.adjust().responsive.recalc();
+                    // $(".glyphicon").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
+                });
+
+                $('.panel-collapse').on('hidden.bs.collapse', function () {
+                    $(this).parent().find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                });
+
+                $("#register").click(function () {
+                    var pinEmail = $('#regpinEmail').val();
+                    getUserInfo(pinEmail,eventId,"register",register);
+                 });
+
+                $("#unregister").click(function () {
+                    var pinEmail = $('#regpinEmail').val();
+                    $.ajax({
+                        url: "/Event/Unregister/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data:{'inputValue':$('#regpinEmail').val(), 'Id':eventId},
+                        success: function (a,b) {
+                            if(a.status == "error")
+                            {
+                                $("#regError").html("<i class='fa fa-warning'>&nbsp;" + a.message + "</i>");
+                            } else if((a.status == "success")){
+                                $("#regError").html("Successfully unregistered");
+                                $('#regpinEmail').val("");
+                                $('#registerUsers').DataTable().ajax.url("/api/Events/GetRegisterees").load();
+                            }
+                        },
+                        error: function() {
+                        }
+                    });
+                });
+
+                $('#registerUsers').DataTable({
+                    ajax:{
+                        url:"/api/Events/GetRegisterees",
+                        data: { id: eventId},
+                        type: "GET" ,
+                        dataType: "JSON"
+                    },
+                    buttons:['copy',{
+                        extend:'excelHtml5',
+                        text: 'Export to Excel',
+                        titleAttr: 'Export to Excel',
+                        filename: ' @Model.EventName - Meeting Registration Sheet',
+                        sheetName:' @Model.EventName - Registration',
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            var numrows = 8;
+                            var clRow = $('row', sheet);
+                            //update Row
+                            clRow.each(function () {
+                                var attr = $(this).attr('r');
+                                var ind = parseInt(attr);
+                                ind = ind + numrows;
+                                $(this).attr("r", ind);
+                            });
+                            // Create row before data
+                            $('row c ', sheet).each(function (index) {
+                                var attr = $(this).attr('r');
+                                var pre = attr.substring(0, 1);
+                                var ind = parseInt(attr.substring(1, attr.length));
+                                ind = ind + numrows;
+                                $(this).attr("r", pre + ind);
+                            });
+                            function Addrow(index, data) {
+                                var row = sheet.createElement('row');
+                                row.setAttribute("r", index);
+                                for (i = 0; i < data.length; i++) {
+                                    var key = data[i].key;
+                                    var value = data[i].value;
+                                    var c  = sheet.createElement('c');
+                                    c.setAttribute("t", "inlineStr");
+                                    c.setAttribute("s", "2");
+                                    c.setAttribute("r", key + index);
+                                    var is = sheet.createElement('is');
+                                    var t = sheet.createElement('t');
+                                    var text = sheet.createTextNode(value)
+                                    t.appendChild(text);
+                                    is.appendChild(t);
+                                    c.appendChild(is);
+                                    row.appendChild(c);
+                                }
+                                return row;
+                            }
+                            var r1 = Addrow(1, [{ key: 'A', value: 'Event Name:              @Model.EventName'}]);
+                            var r2 = Addrow(2, [{ key: 'A', value: 'Location:                @Model.Location'}]);
+                            var r3 = Addrow(3, [{ key: 'A', value: 'Start Date:       @Model.EventStartDate @Model.EventStartTime' }]);
+                            var r4 = Addrow(4, [{ key: 'A', value: 'End Date:         @Model.EventEndDate  @Model.EventEndTime' }]);
+                            var r5 = Addrow(5, [{ key: 'A', value: 'Meeting Organizer:  @ViewBag.organizers' }]);
+                            var r6 = Addrow(6, [{ key: 'A', value: '' }]);
+                            var r7 = Addrow(7, [{ key: 'A', value: '' }]);
+                            var r8 = Addrow(8, [{ key: 'A', value: '' }]);
+                            var sheetData = sheet.getElementsByTagName('sheetData')[0];
+                            sheetData.insertBefore(r8,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r7,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r6,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r5,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r4,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r3,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r2,sheetData.childNodes[0]);
+                            sheetData.insertBefore(r1,sheetData.childNodes[0]);
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'Export to PDF/Print',
+                        titleAttr: 'Export to PDF/Print',
+                        title:'Meeting Registration Sheet',
+                        message:"Event Name:            @Model.EventName\n"+"Start Date:                @Model.EventStartDate  @Model.EventStartTime\n"+" End Date:                  @Model.EventEndDate  @Model.EventEndTime\n"+"Meeting Organizer: @ViewBag.organizers\n",
+                        customize: function(doc) {
+                            doc.styles = {
+                                title: { bold: true, fontSize: '12', alignment: 'center' },
+                                tableHeader: { bold: true, fontSize: 11, alignment: 'left',fillColor:'#666666' },
+                                rowEven: { fontSize: 10, fillColor: '#eaeaea' },
+                                rowOdd: { fontSize: 10,fillColor:'#CCCCCC' }
+                            }
+                        }
+                    }
+                    ],
+                    columns: [
+                        { "data": "FirstName", "autoWidth": true },
+                        { "data": "LastName", "autoWidth": true },
+                        { "data": "Email", "autoWidth": true, "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                            $(nTd).html("<a title='"+oData.Email+"' href='mailto:"+ oData.Email + "?Subject=Electronic Sign in Sheet'>" + oData.Email + "</a>");
+                        }},
+                        { "data": "Phone",  "autoWidth": true },
+                        { "data": "Organization", "autoWidth": true }
+
+                    ],
+                    dom:'Bfrtip',
+                    responsive: true,
+                    autowidth:false
+                });
+                $('.buttons-copy span').text("Copy to Clipboard");
+            });
+
+            function setKeyPressSign(){
+                $('#signpinEmail').keydown(function(e) {
+                    if (e.keyCode == 13) {
+                        $("#signIn").click();
+                    }
+                });
+                // Registration Begin
+                $('#regpinEmail').keydown(function(e) {
+                    if (e.keyCode == 13) {
+                        $("#register").click();
+                    }
+                });
+            };
+            //Show/Hide modal
+
+            $('#addUser-modal').on('hide.bs.modal', function (e) {
+                $("input[type=text]").val("");
+            })
+            //$('#addUser-modal').on('shown.bs.modal', function (e) {
+            //    $('#EmailModel').val(pinEmail);
+            //})
+            function disableregistration(){
+                $('#register').prop('disabled',true);
+                $('#unregister').prop('disabled',true);
+                $('#collapse1').collapse('hide');
+            };
+            function getUserInfo(pinEmail,eventId,eventType,callback){
+                 var evType = null;
+                if(eventType.search("register") == 0){
+                    $('#eType').val(eventType);
+                }else if(eventType.search("signIn") == 0){
+                    $('#eType').val(eventType);}
+                $.ajax({
+                    url: "/api/peopleAPI/GetUserInfo",
+                    data: { pinEmail: pinEmail },
+                    datatype: "json",
+                    success: function (data) {
+                        callback(data.personId,eventId);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status == 404 || errorThrown == 'Not Found') {
+                            $('#addUser-modal').modal("show");
+                            $('#EmailModel').val(pinEmail);
+                        }
+                        if (jqXHR.status == 400 || errorThrown == 'Bad Request') {
+                            if(eventType.search("register") == 0){
+                                $("#regError").html("<i class='fa fa-warning'>&nbsp;" + jqXHR.responseJSON.Message + "</i>");
+                            }else if(eventType.search("signIn") == 0){
+                                $("#signerror").html("<i class='fa fa-warning'>&nbsp;" + jqXHR.responseJSON.Message + "</i>");}
+                           }
+                    }
+                });
+            }
+            function signIn(personId, eventId){
+                $.ajax({
+                    url: "/Event/SignIn/",
+                    type: "POST",
+                    dataType: "JSON",
+                    data:{'personId':personId, 'evntId':eventId},
+                    success: function (a,b) {
+                        if(a.status == "error")
+                        {
+                            $("#signerror").html("<i class='fa fa-warning'>&nbsp;" + a.message + "</i>");
+                        } else if((a.status == "success")){
+                            $("#signerror").html("Successfully Signed In");
+                            $('#signpinEmail').val("");
+                            $('#SignInUsers').DataTable().ajax.url("/api/Events/GetAttendees").load();
+                        }
+                    },
+                  error: function() {
+                    }
+                });
+            }
+            function register(personId, eventId){
+                $.ajax({
+                        url: "/Event/Register/",
+                        type: "POST",
+                        dataType: "JSON",
+                        data:{'personId':personId, 'Id':eventId},
+                        success: function (a,b) {
+                            if(a.status == "error")
+                            {
+                                $("#regError").html("<i class='fa fa-warning'>" + a.message + "</i>");
+                            } else if((a.status == "success")){
+                                $("#regError").html("Successfully registered");
+                                $('#regpinEmail').val("");
+                                $('#registerUsers').DataTable().ajax.url("/api/Events/GetRegisterees").load();
+                            }
+                        },
+                        error: function() {
+                        }
+                    });
+            }
+      </script>
+        <style type="text/css">
+            .required label {
+                     font-weight: bold;
+             }
+            .required label:after {
+                color: #e32;
+                content: ' *';
+                display:inline;
+            }
+            </style>
+    }
+
+                   
+               
